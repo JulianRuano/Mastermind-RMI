@@ -4,6 +4,7 @@ import utilidades.UtilidadesConsola;
 import utilidades.UtilidadesRegistroS;
 import java.rmi.RemoteException;
 import sjuego.sop_rmi.GestionJuegoImpl;
+import sjuego.sop_rmi.ServidorCllbckJuegoImpl;
 
 public class ServidorDeObjetosJuego {
     public static void main(String args[]) throws RemoteException{
@@ -18,9 +19,16 @@ public class ServidorDeObjetosJuego {
         GestionJuegoImpl objRemoto = new GestionJuegoImpl();
         objRemoto.consultarReferenciaRemota(direccionIpNS, numPuertoNS);
 
+        //Callback
+        ServidorCllbckJuegoImpl objRemotoCllbck = new ServidorCllbckJuegoImpl();  
+        
         try {
             UtilidadesRegistroS.RegistrarObjetoRemoto(objRemoto, direccionIpNS, numPuertoNS, "ObjetoRemotoJuego");
-        } catch (Exception e) {
+        
+            UtilidadesRegistroS.arrancarNS(numPuertoNS);
+            UtilidadesRegistroS.RegistrarObjetoRemoto(objRemotoCllbck, direccionIpNS, numPuertoNS,
+                    "servidorCllbckJuego");
+        } catch (RemoteException e) {
             System.err.println("No fue posible Arrancar el NS o Registrar el objeto remoto" + e.getMessage());
         }
     }

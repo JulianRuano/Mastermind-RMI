@@ -1,6 +1,9 @@
 package cliente;
 
+import cliente.sop_rmi.JuegoCllbckImpl;
+import cliente.sop_rmi.JuegoCllbckInt;
 import utilidades.UtilidadesRegistroC;
+import cliente.utilidades.UtilidadesRegistroCll;
 import susuario.dto.UsuarioDTO;
 import susuario.dto.DatosSesionDTO;
 import java.rmi.RemoteException;
@@ -8,6 +11,9 @@ import javax.swing.JPanel;
 import susuario.sop_rmi.GestorUsuariosInt;
 import sjuego.sop_rmi.GestionJuegoInt;
 import vistas.GUIRegistrar;
+import susuario.sop_rmi.ServidorCllbckint;
+import cliente.sop_rmi.UsuarioCllbckImpl;
+import sjuego.sop_rmi.ServidorCllbckJuegoInt;
 
 /**
  *
@@ -17,17 +23,24 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
     
     private final  GestorUsuariosInt objRemotoUsuario;
     private final  GestionJuegoInt objRemotoJuego;
-
+    private final  ServidorCllbckint servidorCllbck;
+    private final  ServidorCllbckJuegoInt servidorCllbckJuego;
+    private UsuarioDTO objUsuario;
+    
     /**
      * Creates new form ClienteDeObjetos
      */
-    public ClienteDeObjetos() {
+    public ClienteDeObjetos(){
         initComponents();
         componentesFalse();
         int numPuertoRMIRegistry = 3000;
         String direccionIpRMIRegistry = "localhost";
-        this.objRemotoUsuario = (GestorUsuariosInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry,numPuertoRMIRegistry, "gestionUsuarios");
-        this.objRemotoJuego = (GestionJuegoInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry,numPuertoRMIRegistry, "ObjetoRemotoJuego");     
+         
+        this.objRemotoUsuario = (GestorUsuariosInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry,numPuertoRMIRegistry, "gestionUsuarios");          
+        this.objRemotoJuego = (GestionJuegoInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry,numPuertoRMIRegistry, "ObjetoRemotoJuego");
+        servidorCllbck = (ServidorCllbckint) UtilidadesRegistroCll.obtenerObjRemoto(direccionIpRMIRegistry,numPuertoRMIRegistry, "servidorCllbck");        
+        servidorCllbckJuego = (ServidorCllbckJuegoInt) UtilidadesRegistroC.obtenerObjRemoto(direccionIpRMIRegistry,numPuertoRMIRegistry, "servidorCllbckJuego");
+        
     }
     
     public void componentesFalse(){
@@ -51,6 +64,9 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         this.btnConsultarPartida.setVisible(true);
     }
     
+    public void notificacion(String msj){
+        this.textArea.setText(msj);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -80,6 +96,9 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         txtPassword = new javax.swing.JPasswordField();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        textArea = new javax.swing.JTextArea();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -88,6 +107,11 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(0, 102, 204));
 
         btnJugar.setText("Jugar");
+        btnJugar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnJugarActionPerformed(evt);
+            }
+        });
 
         btnSalir.setText("Salir");
 
@@ -137,9 +161,9 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
                 .addComponent(btnJugar, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnConsultarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 261, Short.MAX_VALUE)
+                .addGap(183, 183, 183)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(102, 102, 102))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jpMain.setBackground(new java.awt.Color(255, 255, 255));
@@ -206,9 +230,30 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
                 .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(145, 145, 145)
+                .addGap(130, 130, 130)
                 .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(223, Short.MAX_VALUE))
+        );
+
+        textArea.setColumns(20);
+        textArea.setRows(5);
+        jScrollPane3.setViewportView(textArea);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(109, 109, 109)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -219,16 +264,21 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jpMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
 
@@ -265,15 +315,21 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         objSesion.setID(id);
         objSesion.setNombreUsuario(user);
         objSesion.setClave(password);
-        UsuarioDTO objUsuario = new UsuarioDTO();
+        UsuarioDTO objUsuarioI = new UsuarioDTO();
+        this.objUsuario = objUsuarioI;
         
         try {
             
             objUsuario = objRemotoUsuario.iniciarSesion(objSesion);
             if(objUsuario.getID() == 0){
                 componentesAdmin();
+                UsuarioCllbckImpl nuevoUsuario= new UsuarioCllbckImpl();
+                nuevoUsuario.objCliente(this);
+                servidorCllbck.registrarUsuario(nuevoUsuario);
+                servidorCllbck.enviarMensaje("Usuario Conectado");               
             }else if(objUsuario.getID() >= 1){
                 componentesJugador();
+                servidorCllbck.enviarMensaje("Admin: Usuario Conectado ID:"+objUsuario.getID()); 
             }else{
                 System.out.println("Usuario no encontrado");
             }  
@@ -282,6 +338,22 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         }                 
         System.out.println("*** Iniciar Sesion ***");    
     }//GEN-LAST:event_btnIniciarActionPerformed
+
+    private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
+        int identificacion = objUsuario.getID();
+        System.out.println("==Jugar==");    
+        try {
+            objRemotoJuego.iniciarJuego(identificacion);
+            System.out.println("El jugador con identificacion " + identificacion + " ha iniciado el juego");
+                            JuegoCllbckImpl nuevoUsuario= new JuegoCllbckImpl(); 
+                nuevoUsuario.enviarCliente(this);
+                servidorCllbckJuego.registrarUsuario(nuevoUsuario);
+                servidorCllbckJuego.enviarMensaje("Usuario Conectado ID:"+identificacion);
+        } catch (RemoteException e) {
+            System.out.println("La operacion no se pudo completar, intente nuevamente...");      
+        }
+        
+    }//GEN-LAST:event_btnJugarActionPerformed
 
     private void ShowJPanel(JPanel p){
         p.setSize(1200,600);
@@ -324,6 +396,7 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new ClienteDeObjetos().setVisible(true);
             }
@@ -345,9 +418,12 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JPanel jpMain;
+    private javax.swing.JTextArea textArea;
     private javax.swing.JTextPane txtD;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextPane txtUser;

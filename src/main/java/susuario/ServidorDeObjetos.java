@@ -22,11 +22,17 @@ public class ServidorDeObjetos {
         numPuertoRMIRegistry = UtilidadesConsola.leerEntero();
 
         GestorUsuariosImpl objRemoto = new GestorUsuariosImpl();// se leasigna el puerto de escucha del objeto remoto
-
+        ServidorCllbckImpl objRemotoCllbck = new ServidorCllbckImpl();       
+        
         try {
             UtilidadesRegistroS.arrancarNS(numPuertoRMIRegistry);
             UtilidadesRegistroS.RegistrarObjetoRemoto(objRemoto, direccionIpRMIRegistry, numPuertoRMIRegistry,
                     "gestionUsuarios");
+            
+            UtilidadesRegistroS.arrancarNS(numPuertoRMIRegistry);
+            UtilidadesRegistroS.RegistrarObjetoRemoto(objRemotoCllbck, direccionIpRMIRegistry, numPuertoRMIRegistry,
+                    "servidorCllbck");
+            System.out.println("**** cll ****");
 
         } catch (Exception e) {
             System.err.println("No fue posible Arrancar el NS o Registrar el objeto remoto" + e.getMessage());
