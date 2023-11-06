@@ -10,10 +10,15 @@ import java.rmi.RemoteException;
 import javax.swing.JPanel;
 import susuario.sop_rmi.GestorUsuariosInt;
 import sjuego.sop_rmi.GestionJuegoInt;
-import vistas.GUIRegistrar;
 import susuario.sop_rmi.ServidorCllbckint;
 import cliente.sop_rmi.UsuarioCllbckImpl;
 import sjuego.sop_rmi.ServidorCllbckJuegoInt;
+//imports vistas
+import vistas.GUIRegistrar;
+import vistas.GUIActualizar;
+import vistas.GUIEliminar;
+import vistas.GUIConsultar;
+
 
 /**
  *
@@ -118,6 +123,11 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         btnConsultarPartida.setText("Consultar Partida");
 
         btnConsultar.setText("Consultar");
+        btnConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarActionPerformed(evt);
+            }
+        });
 
         btnRegistrar.setText("Registrar");
         btnRegistrar.addActionListener(new java.awt.event.ActionListener() {
@@ -127,8 +137,18 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         });
 
         btnEliminar.setText("Eliminar");
+        btnEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEliminarActionPerformed(evt);
+            }
+        });
 
         btnActulizar.setText("Actulizar");
+        btnActulizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnActulizarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -354,6 +374,22 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_btnJugarActionPerformed
+
+    private void btnConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarActionPerformed
+        GUIConsultar instance = new GUIConsultar(objRemotoUsuario);
+        ShowJPanel(instance);
+                 
+    }//GEN-LAST:event_btnConsultarActionPerformed
+
+    private void btnActulizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActulizarActionPerformed
+        GUIActualizar instance = new GUIActualizar(objRemotoUsuario);
+        ShowJPanel(instance);
+    }//GEN-LAST:event_btnActulizarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        GUIEliminar instance = new GUIEliminar(objRemotoUsuario);
+        ShowJPanel(instance);
+    }//GEN-LAST:event_btnEliminarActionPerformed
 
     private void ShowJPanel(JPanel p){
         p.setSize(1200,600);
