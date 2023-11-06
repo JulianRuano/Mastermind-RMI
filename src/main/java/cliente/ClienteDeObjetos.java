@@ -18,6 +18,7 @@ import vistas.GUIRegistrar;
 import vistas.GUIActualizar;
 import vistas.GUIEliminar;
 import vistas.GUIConsultar;
+import vistas.GUIJuego;
 
 
 /**
@@ -183,10 +184,11 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
                 .addComponent(btnConsultarPartida, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(183, 183, 183)
                 .addComponent(btnSalir, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(301, Short.MAX_VALUE))
         );
 
-        jpMain.setBackground(new java.awt.Color(255, 255, 255));
+        jpMain.setBackground(new java.awt.Color(204, 204, 204));
+        jpMain.setAlignmentX(5.0F);
 
         jLabel3.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         jLabel3.setText("Usuario");
@@ -214,31 +216,29 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         jpMainLayout.setHorizontalGroup(
             jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMainLayout.createSequentialGroup()
+                .addGap(179, 179, 179)
                 .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jpMainLayout.createSequentialGroup()
-                        .addGap(292, 292, 292)
+                        .addGap(100, 100, 100)
                         .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jpMainLayout.createSequentialGroup()
-                        .addGap(192, 192, 192)
                         .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jpMainLayout.createSequentialGroup()
-                                .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel3)
-                                    .addComponent(jLabel1))
-                                .addGap(98, 98, 98)
-                                .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jpMainLayout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(120, 120, 120)
-                                .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(202, Short.MAX_VALUE))
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel1))
+                        .addGap(98, 98, 98)
+                        .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jpMainLayout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(120, 120, 120)
+                        .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jpMainLayout.setVerticalGroup(
             jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpMainLayout.createSequentialGroup()
-                .addGap(148, 148, 148)
+                .addGap(97, 97, 97)
                 .addGroup(jpMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -252,7 +252,7 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
                     .addComponent(txtPassword, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(130, 130, 130)
                 .addComponent(btnIniciar, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(223, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         textArea.setColumns(20);
@@ -266,7 +266,7 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(109, 109, 109)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 558, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(115, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -297,8 +297,8 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jpMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jpMain, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
 
@@ -323,52 +323,21 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         System.out.println("*** Registro ***");
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
-    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
-        String user, password;
-        int id;
-        
-        id = Integer.parseInt(this.txtD.getText());
-        user = this.txtUser.getText();
-        password = this.txtPassword.getText();
-        
-        DatosSesionDTO objSesion = new DatosSesionDTO();
-        objSesion.setID(id);
-        objSesion.setNombreUsuario(user);
-        objSesion.setClave(password);
-        UsuarioDTO objUsuarioI = new UsuarioDTO();
-        this.objUsuario = objUsuarioI;
-        
-        try {
-            
-            objUsuario = objRemotoUsuario.iniciarSesion(objSesion);
-            if(objUsuario.getID() == 0){
-                componentesAdmin();
-                UsuarioCllbckImpl nuevoUsuario= new UsuarioCllbckImpl();
-                nuevoUsuario.objCliente(this);
-                servidorCllbck.registrarUsuario(nuevoUsuario);
-                servidorCllbck.enviarMensaje("Usuario Conectado");               
-            }else if(objUsuario.getID() >= 1){
-                componentesJugador();
-                servidorCllbck.enviarMensaje("Admin: Usuario Conectado ID:"+objUsuario.getID()); 
-            }else{
-                System.out.println("Usuario no encontrado");
-            }  
-        } catch (RemoteException e) {
-             System.out.println("La operacion no se pudo completar, intente nuevamente..."+e);
-        }                 
-        System.out.println("*** Iniciar Sesion ***");    
-    }//GEN-LAST:event_btnIniciarActionPerformed
-
     private void btnJugarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnJugarActionPerformed
         int identificacion = objUsuario.getID();
         System.out.println("==Jugar==");    
         try {
             objRemotoJuego.iniciarJuego(identificacion);
             System.out.println("El jugador con identificacion " + identificacion + " ha iniciado el juego");
-                            JuegoCllbckImpl nuevoUsuario= new JuegoCllbckImpl(); 
-                nuevoUsuario.enviarCliente(this);
-                servidorCllbckJuego.registrarUsuario(nuevoUsuario);
-                servidorCllbckJuego.enviarMensaje("Usuario Conectado ID:"+identificacion);
+            JuegoCllbckImpl nuevoUsuario= new JuegoCllbckImpl(); 
+            nuevoUsuario.enviarCliente(this);
+            servidorCllbckJuego.registrarUsuario(nuevoUsuario);
+            servidorCllbckJuego.enviarMensaje("Usuario Conectado ID:"+identificacion);
+            //llamar GUI
+            GUIJuego instance = new GUIJuego(objRemotoJuego);
+            ShowJPanel(instance);
+            
+            
         } catch (RemoteException e) {
             System.out.println("La operacion no se pudo completar, intente nuevamente...");      
         }
@@ -391,9 +360,46 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         ShowJPanel(instance);
     }//GEN-LAST:event_btnEliminarActionPerformed
 
+    private void btnIniciarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarActionPerformed
+        String user, password;
+        int id;
+
+        id = Integer.parseInt(this.txtD.getText());
+        user = this.txtUser.getText();
+        password = this.txtPassword.getText();
+
+        DatosSesionDTO objSesion = new DatosSesionDTO();
+        objSesion.setID(id);
+        objSesion.setNombreUsuario(user);
+        objSesion.setClave(password);
+        UsuarioDTO objUsuarioI = new UsuarioDTO();
+        this.objUsuario = objUsuarioI;
+
+        try {
+
+            objUsuario = objRemotoUsuario.iniciarSesion(objSesion);
+            if(objUsuario.getID() == 0){
+                componentesAdmin();
+                UsuarioCllbckImpl nuevoUsuario= new UsuarioCllbckImpl();
+                nuevoUsuario.objCliente(this);
+                servidorCllbck.registrarUsuario(nuevoUsuario);
+                servidorCllbck.enviarMensaje("Usuario Conectado");
+            }else if(objUsuario.getID() >= 1){
+                componentesJugador();
+                servidorCllbck.enviarMensaje("Admin: Usuario Conectado ID:"+objUsuario.getID());
+            }else{
+                System.out.println("Usuario no encontrado");
+            }
+        } catch (RemoteException e) {
+            System.out.println("La operacion no se pudo completar, intente nuevamente..."+e);
+        }
+        System.out.println("*** Iniciar Sesion ***");
+    }//GEN-LAST:event_btnIniciarActionPerformed
+
     private void ShowJPanel(JPanel p){
-        p.setSize(1200,600);
+        p.setSize(1000,1200);
         p.setLocation(0,0);
+        
         
         this.jpMain.removeAll();
         this.jpMain.add(p);
