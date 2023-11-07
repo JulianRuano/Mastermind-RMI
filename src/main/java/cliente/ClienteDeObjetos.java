@@ -1,3 +1,4 @@
+
 package cliente;
 
 import cliente.sop_rmi.JuegoCllbckImpl;
@@ -17,8 +18,10 @@ import vistas.GUIRegistrar;
 import vistas.GUIActualizar;
 import vistas.GUIEliminar;
 import vistas.GUIConsultar;
+import vistas.GUIConsultarP;
 import vistas.GUIJuego;
 import vistas.GUIJuegoJ2;
+import vistas.GUIWelcome;
 
 
 /**
@@ -122,6 +125,11 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         btnSalir.setText("Salir");
 
         btnConsultarPartida.setText("Consultar Partida");
+        btnConsultarPartida.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarPartidaActionPerformed(evt);
+            }
+        });
 
         btnConsultar.setText("Consultar");
         btnConsultar.addActionListener(new java.awt.event.ActionListener() {
@@ -332,6 +340,7 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
             JuegoCllbckImpl nuevoUsuario= new JuegoCllbckImpl(); 
             nuevoUsuario.enviarCliente(this);
             servidorCllbckJuego.registrarUsuario(nuevoUsuario);
+            servidorCllbckJuego.enviarMensaje("Un Jugador se ha Conectado :D");
             //llamar GUI del juego 
             System.out.println("estado: "+estado);
             if (estado == 1){
@@ -399,7 +408,14 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
             System.out.println("La operacion no se pudo completar, intente nuevamente..."+e);
         }
         System.out.println("*** Iniciar Sesion ***");
+        GUIWelcome instance = new GUIWelcome();
+        ShowJPanel(instance);
     }//GEN-LAST:event_btnIniciarActionPerformed
+
+    private void btnConsultarPartidaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarPartidaActionPerformed
+        GUIConsultarP instance = new GUIConsultarP(objRemotoJuego);
+        ShowJPanel(instance);
+    }//GEN-LAST:event_btnConsultarPartidaActionPerformed
 
     private void ShowJPanel(JPanel p){
         p.setSize(1000,1200);

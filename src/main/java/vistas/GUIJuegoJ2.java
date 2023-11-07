@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import sjuego.sop_rmi.GestionJuegoInt;
 import sjuego.sop_rmi.ServidorCllbckJuegoInt;
 
@@ -26,8 +28,14 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
     Color cian = new Color(0,204,204);
     Color naranja = new Color(255,153,0);
     Color rosa = new Color(255,204,255);
+    Color negro = new Color(0,0,0);
+    Color blanco = new Color(255,255,255);
+    Color neutro = new Color(255,255,204);
+    
     List<Integer> listaColores;
+    List<Integer> listaEspigas;
     int contadorGeneracion = 1;
+    int b1 = 0,b2= 0,b3= 0,b4= 0,b5= 0;
 
     /**
      * Creates new form GUIJuegoJ2
@@ -42,7 +50,7 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         initComponents();
         this.objRemotoJuego = prmRemotoJuego;
         this.servidorCllbckJuego = prmServidorCllbckJuego;
-        listaColores = new ArrayList<>();
+        
         cargarDatosIniciales();     
     }
     
@@ -50,6 +58,21 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         objCallbck = new JuegoCllbckImpl();
         objCallbck.enviarJugador2(this);
         servidorCllbckJuego.registrarUsuario(objCallbck);
+        listaColores = new ArrayList<>();
+        listaEspigas = new ArrayList<>();
+        
+    }
+    
+    private void ocultarDetalles(){
+        this.jpAzul.setVisible(false);
+        this.jpAmarillo.setVisible(false);
+        this.jpMore.setVisible(false);
+        this.jpRojo.setVisible(false);
+        this.jpRosa.setVisible(false);
+        this.jpNaranja.setVisible(false);
+        this.jpCian.setVisible(false);
+        this.jpVerde.setVisible(false);
+
     }
 
     /**
@@ -66,23 +89,7 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         jp1Espiga4 = new javax.swing.JPanel();
         jp1Espiga2 = new javax.swing.JPanel();
         jp1Espiga5 = new javax.swing.JPanel();
-        jp2Espiga1 = new javax.swing.JPanel();
-        jp2Espiga4 = new javax.swing.JPanel();
-        jp2Espiga2 = new javax.swing.JPanel();
-        jp2Espiga5 = new javax.swing.JPanel();
-        jp3Espiga1 = new javax.swing.JPanel();
-        jp3Espiga4 = new javax.swing.JPanel();
-        jp3Espiga2 = new javax.swing.JPanel();
-        jp3Espiga5 = new javax.swing.JPanel();
-        jp4Espiga1 = new javax.swing.JPanel();
-        jp4Espiga4 = new javax.swing.JPanel();
-        jp4Espiga2 = new javax.swing.JPanel();
-        jp4Espiga5 = new javax.swing.JPanel();
-        jp5Espiga1 = new javax.swing.JPanel();
-        jp5Espiga4 = new javax.swing.JPanel();
-        jp5Espiga2 = new javax.swing.JPanel();
         jpf1c1 = new javax.swing.JPanel();
-        jp5Espiga5 = new javax.swing.JPanel();
         jpf2c1 = new javax.swing.JPanel();
         jpEscudo2 = new javax.swing.JPanel();
         jpf1c2 = new javax.swing.JPanel();
@@ -111,14 +118,10 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         jpf4c2 = new javax.swing.JPanel();
         jpNaranja = new javax.swing.JPanel();
         jpRosa = new javax.swing.JPanel();
-        jp2Espiga3 = new javax.swing.JPanel();
         jp1Espiga3 = new javax.swing.JPanel();
         jpf4c4 = new javax.swing.JPanel();
-        jp5Espiga3 = new javax.swing.JPanel();
         jpf4c5 = new javax.swing.JPanel();
-        jp3Espiga3 = new javax.swing.JPanel();
         jpf4c3 = new javax.swing.JPanel();
-        jp4Espiga3 = new javax.swing.JPanel();
         jpf4c1 = new javax.swing.JPanel();
         jpf5c1 = new javax.swing.JPanel();
         jpf5c2 = new javax.swing.JPanel();
@@ -126,12 +129,18 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         jpf5c5 = new javax.swing.JPanel();
         jpf5c3 = new javax.swing.JPanel();
         jp1Espiga1 = new javax.swing.JPanel();
+        jButton1 = new javax.swing.JButton();
 
         jPanel1.setBackground(new java.awt.Color(102, 102, 102));
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 204));
 
         jp1Espiga4.setBackground(new java.awt.Color(255, 255, 255));
+        jp1Espiga4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jp1Espiga4MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jp1Espiga4Layout = new javax.swing.GroupLayout(jp1Espiga4);
         jp1Espiga4.setLayout(jp1Espiga4Layout);
@@ -141,10 +150,15 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         );
         jp1Espiga4Layout.setVerticalGroup(
             jp1Espiga4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 21, Short.MAX_VALUE)
         );
 
         jp1Espiga2.setBackground(new java.awt.Color(255, 255, 255));
+        jp1Espiga2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jp1Espiga2MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jp1Espiga2Layout = new javax.swing.GroupLayout(jp1Espiga2);
         jp1Espiga2.setLayout(jp1Espiga2Layout);
@@ -158,6 +172,11 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         );
 
         jp1Espiga5.setBackground(new java.awt.Color(255, 255, 255));
+        jp1Espiga5.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jp1Espiga5MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jp1Espiga5Layout = new javax.swing.GroupLayout(jp1Espiga5);
         jp1Espiga5.setLayout(jp1Espiga5Layout);
@@ -167,201 +186,6 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         );
         jp1Espiga5Layout.setVerticalGroup(
             jp1Espiga5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jp2Espiga1.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp2Espiga1Layout = new javax.swing.GroupLayout(jp2Espiga1);
-        jp2Espiga1.setLayout(jp2Espiga1Layout);
-        jp2Espiga1Layout.setHorizontalGroup(
-            jp2Espiga1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-        jp2Espiga1Layout.setVerticalGroup(
-            jp2Espiga1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
-        );
-
-        jp2Espiga4.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp2Espiga4Layout = new javax.swing.GroupLayout(jp2Espiga4);
-        jp2Espiga4.setLayout(jp2Espiga4Layout);
-        jp2Espiga4Layout.setHorizontalGroup(
-            jp2Espiga4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jp2Espiga4Layout.setVerticalGroup(
-            jp2Espiga4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
-        );
-
-        jp2Espiga2.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp2Espiga2Layout = new javax.swing.GroupLayout(jp2Espiga2);
-        jp2Espiga2.setLayout(jp2Espiga2Layout);
-        jp2Espiga2Layout.setHorizontalGroup(
-            jp2Espiga2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jp2Espiga2Layout.setVerticalGroup(
-            jp2Espiga2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
-        );
-
-        jp2Espiga5.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp2Espiga5Layout = new javax.swing.GroupLayout(jp2Espiga5);
-        jp2Espiga5.setLayout(jp2Espiga5Layout);
-        jp2Espiga5Layout.setHorizontalGroup(
-            jp2Espiga5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 22, Short.MAX_VALUE)
-        );
-        jp2Espiga5Layout.setVerticalGroup(
-            jp2Espiga5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
-        );
-
-        jp3Espiga1.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp3Espiga1Layout = new javax.swing.GroupLayout(jp3Espiga1);
-        jp3Espiga1.setLayout(jp3Espiga1Layout);
-        jp3Espiga1Layout.setHorizontalGroup(
-            jp3Espiga1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-        jp3Espiga1Layout.setVerticalGroup(
-            jp3Espiga1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
-        );
-
-        jp3Espiga4.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp3Espiga4Layout = new javax.swing.GroupLayout(jp3Espiga4);
-        jp3Espiga4.setLayout(jp3Espiga4Layout);
-        jp3Espiga4Layout.setHorizontalGroup(
-            jp3Espiga4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jp3Espiga4Layout.setVerticalGroup(
-            jp3Espiga4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-
-        jp3Espiga2.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp3Espiga2Layout = new javax.swing.GroupLayout(jp3Espiga2);
-        jp3Espiga2.setLayout(jp3Espiga2Layout);
-        jp3Espiga2Layout.setHorizontalGroup(
-            jp3Espiga2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jp3Espiga2Layout.setVerticalGroup(
-            jp3Espiga2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
-        );
-
-        jp3Espiga5.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp3Espiga5Layout = new javax.swing.GroupLayout(jp3Espiga5);
-        jp3Espiga5.setLayout(jp3Espiga5Layout);
-        jp3Espiga5Layout.setHorizontalGroup(
-            jp3Espiga5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 22, Short.MAX_VALUE)
-        );
-        jp3Espiga5Layout.setVerticalGroup(
-            jp3Espiga5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jp4Espiga1.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp4Espiga1Layout = new javax.swing.GroupLayout(jp4Espiga1);
-        jp4Espiga1.setLayout(jp4Espiga1Layout);
-        jp4Espiga1Layout.setHorizontalGroup(
-            jp4Espiga1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-        jp4Espiga1Layout.setVerticalGroup(
-            jp4Espiga1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
-        );
-
-        jp4Espiga4.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp4Espiga4Layout = new javax.swing.GroupLayout(jp4Espiga4);
-        jp4Espiga4.setLayout(jp4Espiga4Layout);
-        jp4Espiga4Layout.setHorizontalGroup(
-            jp4Espiga4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jp4Espiga4Layout.setVerticalGroup(
-            jp4Espiga4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 18, Short.MAX_VALUE)
-        );
-
-        jp4Espiga2.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp4Espiga2Layout = new javax.swing.GroupLayout(jp4Espiga2);
-        jp4Espiga2.setLayout(jp4Espiga2Layout);
-        jp4Espiga2Layout.setHorizontalGroup(
-            jp4Espiga2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jp4Espiga2Layout.setVerticalGroup(
-            jp4Espiga2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
-        );
-
-        jp4Espiga5.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp4Espiga5Layout = new javax.swing.GroupLayout(jp4Espiga5);
-        jp4Espiga5.setLayout(jp4Espiga5Layout);
-        jp4Espiga5Layout.setHorizontalGroup(
-            jp4Espiga5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 22, Short.MAX_VALUE)
-        );
-        jp4Espiga5Layout.setVerticalGroup(
-            jp4Espiga5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        jp5Espiga1.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp5Espiga1Layout = new javax.swing.GroupLayout(jp5Espiga1);
-        jp5Espiga1.setLayout(jp5Espiga1Layout);
-        jp5Espiga1Layout.setHorizontalGroup(
-            jp5Espiga1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-        jp5Espiga1Layout.setVerticalGroup(
-            jp5Espiga1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
-        );
-
-        jp5Espiga4.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp5Espiga4Layout = new javax.swing.GroupLayout(jp5Espiga4);
-        jp5Espiga4.setLayout(jp5Espiga4Layout);
-        jp5Espiga4Layout.setHorizontalGroup(
-            jp5Espiga4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jp5Espiga4Layout.setVerticalGroup(
-            jp5Espiga4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-
-        jp5Espiga2.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp5Espiga2Layout = new javax.swing.GroupLayout(jp5Espiga2);
-        jp5Espiga2.setLayout(jp5Espiga2Layout);
-        jp5Espiga2Layout.setHorizontalGroup(
-            jp5Espiga2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jp5Espiga2Layout.setVerticalGroup(
-            jp5Espiga2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 21, Short.MAX_VALUE)
         );
 
@@ -376,19 +200,6 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         jpf1c1Layout.setVerticalGroup(
             jpf1c1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 48, Short.MAX_VALUE)
-        );
-
-        jp5Espiga5.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp5Espiga5Layout = new javax.swing.GroupLayout(jp5Espiga5);
-        jp5Espiga5.setLayout(jp5Espiga5Layout);
-        jp5Espiga5Layout.setHorizontalGroup(
-            jp5Espiga5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 22, Short.MAX_VALUE)
-        );
-        jp5Espiga5Layout.setVerticalGroup(
-            jp5Espiga5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
         );
 
         jpf2c1.setBackground(new java.awt.Color(255, 255, 255));
@@ -761,7 +572,7 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         );
         jpf4c2Layout.setVerticalGroup(
             jpf4c2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jpNaranja.setBackground(new java.awt.Color(255, 153, 0));
@@ -802,20 +613,12 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
             .addGap(0, 0, Short.MAX_VALUE)
         );
 
-        jp2Espiga3.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp2Espiga3Layout = new javax.swing.GroupLayout(jp2Espiga3);
-        jp2Espiga3.setLayout(jp2Espiga3Layout);
-        jp2Espiga3Layout.setHorizontalGroup(
-            jp2Espiga3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        jp2Espiga3Layout.setVerticalGroup(
-            jp2Espiga3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
-        );
-
         jp1Espiga3.setBackground(new java.awt.Color(255, 255, 255));
+        jp1Espiga3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jp1Espiga3MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jp1Espiga3Layout = new javax.swing.GroupLayout(jp1Espiga3);
         jp1Espiga3.setLayout(jp1Espiga3Layout);
@@ -838,20 +641,7 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         );
         jpf4c4Layout.setVerticalGroup(
             jpf4c4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
-        );
-
-        jp5Espiga3.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp5Espiga3Layout = new javax.swing.GroupLayout(jp5Espiga3);
-        jp5Espiga3.setLayout(jp5Espiga3Layout);
-        jp5Espiga3Layout.setHorizontalGroup(
-            jp5Espiga3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-        jp5Espiga3Layout.setVerticalGroup(
-            jp5Espiga3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
+            .addGap(0, 40, Short.MAX_VALUE)
         );
 
         jpf4c5.setBackground(new java.awt.Color(255, 255, 255));
@@ -864,20 +654,7 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         );
         jpf4c5Layout.setVerticalGroup(
             jpf4c5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
-        );
-
-        jp3Espiga3.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp3Espiga3Layout = new javax.swing.GroupLayout(jp3Espiga3);
-        jp3Espiga3.setLayout(jp3Espiga3Layout);
-        jp3Espiga3Layout.setHorizontalGroup(
-            jp3Espiga3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-        jp3Espiga3Layout.setVerticalGroup(
-            jp3Espiga3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jpf4c3.setBackground(new java.awt.Color(255, 255, 255));
@@ -890,20 +667,7 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         );
         jpf4c3Layout.setVerticalGroup(
             jpf4c3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
-        );
-
-        jp4Espiga3.setBackground(new java.awt.Color(255, 255, 255));
-
-        javax.swing.GroupLayout jp4Espiga3Layout = new javax.swing.GroupLayout(jp4Espiga3);
-        jp4Espiga3.setLayout(jp4Espiga3Layout);
-        jp4Espiga3Layout.setHorizontalGroup(
-            jp4Espiga3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 20, Short.MAX_VALUE)
-        );
-        jp4Espiga3Layout.setVerticalGroup(
-            jp4Espiga3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 21, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jpf4c1.setBackground(new java.awt.Color(255, 255, 255));
@@ -916,7 +680,7 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         );
         jpf4c1Layout.setVerticalGroup(
             jpf4c1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 48, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         jpf5c1.setBackground(new java.awt.Color(255, 255, 255));
@@ -985,6 +749,11 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         );
 
         jp1Espiga1.setBackground(new java.awt.Color(255, 255, 255));
+        jp1Espiga1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jp1Espiga1MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jp1Espiga1Layout = new javax.swing.GroupLayout(jp1Espiga1);
         jp1Espiga1.setLayout(jp1Espiga1Layout);
@@ -996,6 +765,13 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
             jp1Espiga1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 0, Short.MAX_VALUE)
         );
+
+        jButton1.setText("Enviar espigas");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -1060,60 +836,9 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
                                         .addComponent(jpf2c5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jpf1c5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jpf3c5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                        .addGap(51, 51, 51)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jp3Espiga4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jp3Espiga1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jp3Espiga2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jp3Espiga5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jp3Espiga3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jp4Espiga4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jp4Espiga1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jp4Espiga2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jp4Espiga5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jp4Espiga3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jp5Espiga4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jp5Espiga1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jp5Espiga2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jp5Espiga5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jp5Espiga3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jp2Espiga4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jp2Espiga1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jp2Espiga2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jp2Espiga5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jp2Espiga3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                                .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jp1Espiga4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jp1Espiga1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jp1Espiga2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jp1Espiga5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(jp1Espiga3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(43, 43, 43))
+                        .addGap(28, 28, 28)
+                        .addComponent(jButton1)
+                        .addGap(14, 14, 14))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jpAzul, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -1139,106 +864,85 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jpCian, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jpNaranja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jpRosa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jp1Espiga4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jp1Espiga1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                            .addComponent(jp1Espiga2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(jp1Espiga5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jp1Espiga3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addComponent(jpNaranja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jpRosa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(5, 5, 5)))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jp1Espiga1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jp1Espiga2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jp1Espiga3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jp1Espiga4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jp1Espiga5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpf1c5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jpf1c1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jpf1c2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jpf1c3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jpf1c4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jp2Espiga1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jp2Espiga2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jp2Espiga3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(8, 8, 8)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jp2Espiga4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jp2Espiga5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jpf2c2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jpf2c1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jpf2c3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jpf2c4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jpf2c5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(12, 12, 12)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(0, 1, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jp3Espiga1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jp3Espiga2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jp3Espiga3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jp3Espiga5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jp3Espiga4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(19, 19, 19))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jpf2c2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jpf2c1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jpf2c3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jpf2c4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jpf2c5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(24, 24, 24)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jpf3c2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpf3c1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpf3c3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpf3c4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jpf3c5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jpf3c5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(55, 55, 55)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jp1Espiga1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jp1Espiga2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jp1Espiga3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jp1Espiga5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jp1Espiga4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jp4Espiga1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jp4Espiga2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jp4Espiga3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jp4Espiga5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jp4Espiga4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jpf4c5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jpf4c4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jpf4c3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jpf4c2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jpf4c1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jpf4c5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(14, 14, 14))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jpf5c5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jp5Espiga1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jp5Espiga2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jp5Espiga3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jp5Espiga5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jp5Espiga4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addComponent(jButton1)
+                        .addGap(0, 30, Short.MAX_VALUE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jpf5c5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jpf4c1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jpf4c4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jpf4c2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jpf4c3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jpf5c1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpf5c2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jpf5c3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jpf5c4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
+                            .addComponent(jpf5c4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jpf5c1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jpEscudo1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jpEscudo4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1291,7 +995,7 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(36, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -1456,9 +1160,111 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         }       
     }//GEN-LAST:event_jpAmarilloMouseClicked
 
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        listaEspigas.add(b1);
+        listaEspigas.add(b2);
+        listaEspigas.add(b3);
+        listaEspigas.add(b4);
+        listaEspigas.add(b5);
+        
+        try {
+            System.out.println("**** Enviar Espigas *****");
+            servidorCllbckJuego.enviarEspigas(listaEspigas);
+        } catch (RemoteException ex) {
+            Logger.getLogger(GUIJuegoJ2.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jp1Espiga1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp1Espiga1MouseClicked
+        switch (b1) {
+            case 0 -> {
+                this.jp1Espiga1.setBackground(neutro);
+                b1 = 1;
+            }
+            case 1 -> {
+                this.jp1Espiga1.setBackground(negro);
+                b1 = 2;
+            }
+            case 2 -> {
+                this.jp1Espiga1.setBackground(blanco);
+                b1 = 0;
+            }
+        }
+    }//GEN-LAST:event_jp1Espiga1MouseClicked
+
+    private void jp1Espiga2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp1Espiga2MouseClicked
+       switch (b2) {
+            case 0 -> {
+                this.jp1Espiga2.setBackground(neutro);
+                b2 = 1;
+            }
+            case 1 -> {
+                this.jp1Espiga2.setBackground(negro);
+                b2 = 2;
+            }
+            case 2 -> {
+                this.jp1Espiga2.setBackground(blanco);
+                b2 = 0;
+            }
+        }      
+    }//GEN-LAST:event_jp1Espiga2MouseClicked
+
+    private void jp1Espiga3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp1Espiga3MouseClicked
+       switch (b3) {
+            case 0 -> {
+                this.jp1Espiga3.setBackground(neutro);
+                b3 = 1;
+            }
+            case 1 -> {
+                this.jp1Espiga3.setBackground(negro);
+                b3 = 2;
+            }
+            case 2 -> {
+                this.jp1Espiga3.setBackground(blanco);
+                b3 = 0;
+            }
+        }
+    }//GEN-LAST:event_jp1Espiga3MouseClicked
+
+    private void jp1Espiga4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp1Espiga4MouseClicked
+       switch (b4) {
+            case 0 -> {
+                this.jp1Espiga4.setBackground(neutro);
+                b4 = 1;
+            }
+            case 1 -> {
+                this.jp1Espiga4.setBackground(negro);
+                b4 = 2;
+            }
+            case 2 -> {
+                this.jp1Espiga4.setBackground(blanco);
+                b4 = 0;
+            }
+        }
+    }//GEN-LAST:event_jp1Espiga4MouseClicked
+
+    private void jp1Espiga5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jp1Espiga5MouseClicked
+       switch (b5) {
+            case 0 -> {
+                this.jp1Espiga5.setBackground(neutro);
+                b5 = 1;
+            }
+            case 1 -> {
+                this.jp1Espiga5.setBackground(negro);
+                b5 = 2;
+            }
+            case 2 -> {
+                this.jp1Espiga5.setBackground(blanco);
+                b5 = 0;
+            }
+        }
+    }//GEN-LAST:event_jp1Espiga5MouseClicked
+
+    
     private void enviarDatos(){
         try {
             servidorCllbckJuego.enviarColoresIniciales(listaColores);
+            ocultarDetalles();
             listaColores.clear();
         } catch (RemoteException e) {
             System.err.println("Error al llamar el objRemoto CallBack");
@@ -1531,6 +1337,7 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jp1Espiga1;
@@ -1538,26 +1345,6 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
     private javax.swing.JPanel jp1Espiga3;
     private javax.swing.JPanel jp1Espiga4;
     private javax.swing.JPanel jp1Espiga5;
-    private javax.swing.JPanel jp2Espiga1;
-    private javax.swing.JPanel jp2Espiga2;
-    private javax.swing.JPanel jp2Espiga3;
-    private javax.swing.JPanel jp2Espiga4;
-    private javax.swing.JPanel jp2Espiga5;
-    private javax.swing.JPanel jp3Espiga1;
-    private javax.swing.JPanel jp3Espiga2;
-    private javax.swing.JPanel jp3Espiga3;
-    private javax.swing.JPanel jp3Espiga4;
-    private javax.swing.JPanel jp3Espiga5;
-    private javax.swing.JPanel jp4Espiga1;
-    private javax.swing.JPanel jp4Espiga2;
-    private javax.swing.JPanel jp4Espiga3;
-    private javax.swing.JPanel jp4Espiga4;
-    private javax.swing.JPanel jp4Espiga5;
-    private javax.swing.JPanel jp5Espiga1;
-    private javax.swing.JPanel jp5Espiga2;
-    private javax.swing.JPanel jp5Espiga3;
-    private javax.swing.JPanel jp5Espiga4;
-    private javax.swing.JPanel jp5Espiga5;
     private javax.swing.JPanel jpAmarillo;
     private javax.swing.JPanel jpAzul;
     private javax.swing.JPanel jpCian;

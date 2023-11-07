@@ -179,7 +179,12 @@ public class GUIRegistrar extends javax.swing.JPanel {
          } catch (RemoteException e) {
             System.out.println("La operacion no se pudo completar, intente nuevamente..."+e); 
          } 
-               
+         
+         this.txtAge.setText("");
+         this.txtD.setText("");
+         this.txtName.setText("");
+         this.txtPassword.setText("");
+         this.txtUser.setText("");               
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
 

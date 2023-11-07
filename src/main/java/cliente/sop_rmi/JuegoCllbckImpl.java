@@ -42,12 +42,14 @@ public class JuegoCllbckImpl  extends UnicastRemoteObject implements JuegoCllbck
         if (objJugador2 != null) {
             objJugador2.actulizarTablero(lista);           
         }
-
     }
     
     @Override
     public void notificarEspigas(List<Integer> listaEspigas)throws RemoteException {
         System.out.println("Invocando al método notificar espigas desde el cliente");
+        if (objJugador1 != null) {
+            objJugador1.actulizarEspigas(listaEspigas);
+        }
         
     }
     

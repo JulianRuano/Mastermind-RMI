@@ -10,6 +10,8 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import sjuego.sop_rmi.GestionJuegoInt;
 import sjuego.sop_rmi.ServidorCllbckJuegoInt;
 
@@ -27,9 +29,14 @@ public class GUIJuego extends javax.swing.JPanel {
     Color cian = new Color(0,204,204);
     Color naranja = new Color(255,153,0);
     Color rosa = new Color(255,204,255);
+    Color negro = new Color(0,0,0);
+    Color blanco = new Color(255,255,255);
+    Color neutro = new Color(255,255,204);
     List<Integer> escudo;
     List<Integer> listaColores;
-    
+
+
+    int contadorGeneracion = 1;
     int contadorColor = 0;
     int fila = 1;
     int columna = 1;
@@ -1832,16 +1839,77 @@ public class GUIJuego extends javax.swing.JPanel {
         }
         if (bandera) {
             System.out.println("***Gano***");
+            JFrame jframe = new JFrame();
+            JOptionPane.showMessageDialog(jframe, "Fin del juego");    
         }
         
         try {
             servidorCllbckJuego.enviarColores(listaColores);
             listaColores.clear();
         } catch (RemoteException e) {
-            System.err.println("Error al llamar el objRemoto CallBack");
+            System.err.println("Error al llamar el objRemoto CallBack... CargarColoresValidos()");
         }      
     }    
     
+    public void actulizarEspigas(List<Integer>  listaEspigas){
+        System.out.println("**********actulizarEspigas****************");
+        
+         switch (contadorGeneracion) {
+                case 1 -> {
+                    this.jp1Espiga1.setBackground(seleccionColor(listaEspigas.get(0))); 
+                    this.jp1Espiga2.setBackground(seleccionColor(listaEspigas.get(1))); 
+                    this.jp1Espiga3.setBackground(seleccionColor(listaEspigas.get(2))); 
+                    this.jp1Espiga4.setBackground(seleccionColor(listaEspigas.get(3))); 
+                    this.jp1Espiga5.setBackground(seleccionColor(listaEspigas.get(4))); 
+                    contadorGeneracion ++;
+                }
+                case 2 -> {
+                    this.jp2Espiga1.setBackground(seleccionColor(listaEspigas.get(0))); 
+                    this.jp2Espiga2.setBackground(seleccionColor(listaEspigas.get(1))); 
+                    this.jp2Espiga2.setBackground(seleccionColor(listaEspigas.get(2))); 
+                    this.jp2Espiga2.setBackground(seleccionColor(listaEspigas.get(3))); 
+                    this.jp2Espiga2.setBackground(seleccionColor(listaEspigas.get(4))); 
+                    contadorGeneracion ++;
+                }
+                case 3 -> {
+                    this.jp3Espiga1.setBackground(seleccionColor(listaEspigas.get(0))); 
+                    this.jp3Espiga2.setBackground(seleccionColor(listaEspigas.get(1))); 
+                    this.jp3Espiga3.setBackground(seleccionColor(listaEspigas.get(2))); 
+                    this.jp3Espiga4.setBackground(seleccionColor(listaEspigas.get(3))); 
+                    this.jp3Espiga5.setBackground(seleccionColor(listaEspigas.get(4))); 
+                    contadorGeneracion ++;
+                }
+                case 4 -> {
+                    this.jp4Espiga1.setBackground(seleccionColor(listaEspigas.get(0))); 
+                    this.jp4Espiga2.setBackground(seleccionColor(listaEspigas.get(1))); 
+                    this.jp4Espiga3.setBackground(seleccionColor(listaEspigas.get(2))); 
+                    this.jp4Espiga4.setBackground(seleccionColor(listaEspigas.get(3))); 
+                    this.jp4Espiga5.setBackground(seleccionColor(listaEspigas.get(4))); 
+                    contadorGeneracion ++;
+                }
+                case 5 -> {
+                    this.jp5Espiga1.setBackground(seleccionColor(listaEspigas.get(0))); 
+                    this.jp5Espiga2.setBackground(seleccionColor(listaEspigas.get(1))); 
+                    this.jp5Espiga3.setBackground(seleccionColor(listaEspigas.get(2))); 
+                    this.jp5Espiga4.setBackground(seleccionColor(listaEspigas.get(3))); 
+                    this.jp5Espiga5.setBackground(seleccionColor(listaEspigas.get(4))); 
+                    contadorGeneracion ++;
+                }                       
+                default -> throw new AssertionError();
+            }            
+    }
+    
+    
+    public Color seleccionColor(int valor){
+        Color resultadoColor = null;
+        switch (valor) {
+            case 0 -> {resultadoColor = neutro; }
+            case 1 -> {resultadoColor = blanco;}
+            case 2 -> {resultadoColor = negro;}
+            default -> throw new AssertionError();
+        }
+        return resultadoColor;
+    }
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
