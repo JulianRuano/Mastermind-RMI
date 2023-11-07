@@ -61,6 +61,14 @@ public class JuegoCllbckImpl  extends UnicastRemoteObject implements JuegoCllbck
         }
        
     }
+
+    @Override
+    public void notificarGanador(String mensaje, boolean valor) throws RemoteException {
+        System.out.println("Invocando al método notificarGanador desde el cliente");
+        if (objCliente != null) {
+            objCliente.notificarGanador(mensaje, valor);
+        }
+    }
     
     public void enviarCliente(ClienteDeObjetos prmCliente){
         this.objCliente = prmCliente;      

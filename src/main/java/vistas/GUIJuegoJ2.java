@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JPanel;
 import sjuego.sop_rmi.GestionJuegoInt;
 import sjuego.sop_rmi.ServidorCllbckJuegoInt;
 
@@ -64,14 +65,14 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
     }
     
     private void ocultarDetalles(){
-        this.jpAzul.setVisible(false);
-        this.jpAmarillo.setVisible(false);
-        this.jpMore.setVisible(false);
-        this.jpRojo.setVisible(false);
-        this.jpRosa.setVisible(false);
-        this.jpNaranja.setVisible(false);
-        this.jpCian.setVisible(false);
-        this.jpVerde.setVisible(false);
+        this.jpAzul.setEnabled(false);
+        this.jpAmarillo.setEnabled(false);
+        this.jpMore.setEnabled(false);
+        this.jpRojo.setEnabled(false);
+        this.jpRosa.setEnabled(false);
+        this.jpNaranja.setEnabled(false);
+        this.jpCian.setEnabled(false);
+        this.jpVerde.setEnabled(false);
 
     }
 
@@ -1335,6 +1336,7 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
         }
         return resultadoColor;
     }
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;

@@ -12,6 +12,7 @@ import java.util.List;
 import java.util.Objects;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import sjuego.sop_rmi.GestionJuegoInt;
 import sjuego.sop_rmi.ServidorCllbckJuegoInt;
 
@@ -1903,13 +1904,14 @@ public class GUIJuego extends javax.swing.JPanel {
     public Color seleccionColor(int valor){
         Color resultadoColor = null;
         switch (valor) {
-            case 0 -> {resultadoColor = neutro; }
-            case 1 -> {resultadoColor = blanco;}
+            case 0 -> {resultadoColor = blanco; }
+            case 1 -> {resultadoColor = neutro;}
             case 2 -> {resultadoColor = negro;}
             default -> throw new AssertionError();
         }
         return resultadoColor;
     }
+    
         
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

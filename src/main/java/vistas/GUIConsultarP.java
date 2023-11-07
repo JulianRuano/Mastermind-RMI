@@ -1,16 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package vistas;
 
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+
 import sjuego.sop_rmi.GestionJuegoInt;
+import sregistro.dto.RegistroDTO;
 
 /**
  *
  * @author julianm
  */
-public class GUIConsultarP extends javax.swing.JPanel {
+public final class GUIConsultarP extends javax.swing.JPanel {
     
     private final  GestionJuegoInt objRemotoJuego;
 
@@ -21,7 +21,23 @@ public class GUIConsultarP extends javax.swing.JPanel {
     public GUIConsultarP(GestionJuegoInt prmRemotoJuego) {
         initComponents();
         this.objRemotoJuego = prmRemotoJuego;
+        consultarRegistros();
     }
+
+    public void consultarRegistros() {
+        try {
+             ArrayList<RegistroDTO> registro = objRemotoJuego.consultarDatos();
+            //Convertir el arraylist a un string para imprimirlo en el text area
+            String datos = "";
+            for (RegistroDTO res : registro) {
+                datos +="Id Juego: "+res.getId_juego()+" Id Jugador 1: "+ res.getId_jugador1()+ " Id Jugador 2:" + res.getId_jugador2() + "\n";
+            }
+            txtArea.setText(datos);           
+        } catch (RemoteException e) {
+            System.out.println("Error al consultar los datos");
+        }
+    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -34,26 +50,40 @@ public class GUIConsultarP extends javax.swing.JPanel {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        txtArea = new javax.swing.JTextArea();
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
+        jLabel1.setFont(new java.awt.Font("Liberation Sans", 0, 24)); // NOI18N
         jLabel1.setText("Datos");
+
+        txtArea.setColumns(20);
+        txtArea.setRows(5);
+        jScrollPane1.setViewportView(txtArea);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(225, 225, 225)
-                .addComponent(jLabel1)
-                .addContainerGap(240, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(225, 225, 225)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 456, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(18, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
+                .addGap(24, 24, 24)
                 .addComponent(jLabel1)
-                .addContainerGap(403, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 292, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(103, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -63,14 +93,14 @@ public class GUIConsultarP extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(22, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -78,5 +108,7 @@ public class GUIConsultarP extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea txtArea;
     // End of variables declaration//GEN-END:variables
 }

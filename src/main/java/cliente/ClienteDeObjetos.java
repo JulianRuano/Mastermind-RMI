@@ -22,6 +22,7 @@ import vistas.GUIConsultarP;
 import vistas.GUIJuego;
 import vistas.GUIJuegoJ2;
 import vistas.GUIWelcome;
+import vistas.GUIWin;
 
 
 /**
@@ -340,7 +341,7 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
             JuegoCllbckImpl nuevoUsuario= new JuegoCllbckImpl(); 
             nuevoUsuario.enviarCliente(this);
             servidorCllbckJuego.registrarUsuario(nuevoUsuario);
-            servidorCllbckJuego.enviarMensaje("Un Jugador se ha Conectado :D");
+            servidorCllbckJuego.enviarMensaje("Un Jugador se ha Conectado ID: "+identificacion);
             //llamar GUI del juego 
             System.out.println("estado: "+estado);
             if (estado == 1){
@@ -417,6 +418,11 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         ShowJPanel(instance);
     }//GEN-LAST:event_btnConsultarPartidaActionPerformed
 
+    public void notificarGanador(String mensaje,boolean valor){
+        GUIWin instance = new GUIWin(mensaje);
+        ShowJPanel(instance);       
+    }
+    
     private void ShowJPanel(JPanel p){
         p.setSize(1000,1200);
         p.setLocation(0,0);

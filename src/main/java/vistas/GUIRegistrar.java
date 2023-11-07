@@ -3,6 +3,8 @@ package vistas;
 
 import susuario.dto.UsuarioDTO;
 import java.rmi.RemoteException;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import susuario.sop_rmi.GestorUsuariosInt;
 
 
@@ -171,10 +173,15 @@ public class GUIRegistrar extends javax.swing.JPanel {
          UsuarioDTO objUsuario= new UsuarioDTO(id, name, user,age,password);
          try {
             estado = objRemotoUsuario.registrarUsuario(objUsuario);//invocación al método remoto
-            if(estado)
-                    System.out.println("Registro realizado satisfactoriamente...");
-            else
-                    System.out.println("no se pudo realizar el registro...");
+            if(estado){
+                System.out.println("Registro realizado satisfactoriamente...");
+                JFrame jframe = new JFrame();
+                JOptionPane.showMessageDialog(jframe, "Se registro correctamente ");
+            }else{
+                System.out.println("no se pudo realizar el registro...");
+                JFrame jframe = new JFrame();
+                JOptionPane.showMessageDialog(jframe, "Error: No se pudo registrar");
+            }
             
          } catch (RemoteException e) {
             System.out.println("La operacion no se pudo completar, intente nuevamente..."+e); 
@@ -184,7 +191,8 @@ public class GUIRegistrar extends javax.swing.JPanel {
          this.txtD.setText("");
          this.txtName.setText("");
          this.txtPassword.setText("");
-         this.txtUser.setText("");               
+         this.txtUser.setText("");     
+         
     }//GEN-LAST:event_btnRegistrarActionPerformed
 
 

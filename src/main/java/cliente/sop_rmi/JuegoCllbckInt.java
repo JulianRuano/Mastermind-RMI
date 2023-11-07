@@ -17,4 +17,5 @@ public interface JuegoCllbckInt extends Remote{
      public void notificarColores(List<Integer> listaColores) throws RemoteException;
      public void notificarEspigas(List<Integer> listaEspigas) throws RemoteException;
      public void notificarColoresIniciales(List<Integer> listaColoresIniciales) throws RemoteException;
+     public void notificarGanador(String mensaje,boolean valor) throws RemoteException;
 }

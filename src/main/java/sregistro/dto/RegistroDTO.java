@@ -12,6 +12,9 @@ public class RegistroDTO implements Serializable {
         this.id_jugador1 = id_jugador1;
         this.id_jugador2 = id_jugador2;
     }
+
+    public RegistroDTO() {
+    }
         
 
     public int getId_juego() {
