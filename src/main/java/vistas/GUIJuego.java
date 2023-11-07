@@ -4,8 +4,14 @@
  */
 package vistas;
 
+import cliente.sop_rmi.JuegoCllbckImpl;
 import java.awt.Color;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import sjuego.sop_rmi.GestionJuegoInt;
+import sjuego.sop_rmi.ServidorCllbckJuegoInt;
 
 /**
  *
@@ -21,15 +27,31 @@ public class GUIJuego extends javax.swing.JPanel {
     Color cian = new Color(0,204,204);
     Color naranja = new Color(255,153,0);
     Color rosa = new Color(255,204,255);
+    List<Integer> escudo;
+    List<Integer> listaColores;
     
+    int contadorColor = 0;
     int fila = 1;
     int columna = 1;
 
     private final  GestionJuegoInt objRemotoJuego;
+    JuegoCllbckImpl objCallbck;
+    private final  ServidorCllbckJuegoInt servidorCllbckJuego;
     
-    public GUIJuego(GestionJuegoInt prmRemotoJuego) {
+    public GUIJuego(GestionJuegoInt prmRemotoJuego, ServidorCllbckJuegoInt prmServidorCllbckJuego) throws RemoteException {
         initComponents();
         this.objRemotoJuego = prmRemotoJuego;
+        this.servidorCllbckJuego = prmServidorCllbckJuego;
+        cargarDatosIniciales();
+
+    }
+    
+    private void cargarDatosIniciales() throws RemoteException{
+        objCallbck = new JuegoCllbckImpl();
+        objCallbck.enviarJugador1(this);
+        servidorCllbckJuego.registrarUsuario(objCallbck);
+        escudo = new ArrayList<>();
+        listaColores = new ArrayList<>();
     }
 
     /**
@@ -1315,6 +1337,12 @@ public class GUIJuego extends javax.swing.JPanel {
                 }                       
                 default -> throw new AssertionError();
             } 
+            listaColores.add(1);
+            contadorColor++;
+            if (contadorColor == 5){
+                enviarDatos();
+                contadorColor = 0;
+            }
         }
     }//GEN-LAST:event_jpAzulMouseClicked
 
@@ -1376,6 +1404,12 @@ public class GUIJuego extends javax.swing.JPanel {
                 }                                   
                 default -> throw new AssertionError();
             }
+            listaColores.add(2);
+            contadorColor++;
+            if (contadorColor == 5){
+                enviarDatos();
+                contadorColor = 0;
+            }          
         }
     }//GEN-LAST:event_jpAmarilloMouseClicked
 
@@ -1437,6 +1471,12 @@ public class GUIJuego extends javax.swing.JPanel {
                 }                       
                 default -> throw new AssertionError();
             }
+            listaColores.add(3);
+            contadorColor++;
+            if (contadorColor == 5){
+                enviarDatos();
+                contadorColor = 0;
+            } 
         }               
     }//GEN-LAST:event_jpRojoMouseClicked
 
@@ -1498,6 +1538,12 @@ public class GUIJuego extends javax.swing.JPanel {
                 }                       
                 default -> throw new AssertionError();
             }
+            listaColores.add(4);
+            contadorColor++;
+            if (contadorColor == 5){
+                enviarDatos();
+                contadorColor = 0;
+            } 
         }
     }//GEN-LAST:event_jpVerdeMouseClicked
 
@@ -1559,6 +1605,12 @@ public class GUIJuego extends javax.swing.JPanel {
                 }                       
                 default -> throw new AssertionError();
             }
+            listaColores.add(5);
+            contadorColor++;
+            if (contadorColor == 5){
+                enviarDatos();
+                contadorColor = 0;
+            } 
         }
     }//GEN-LAST:event_jpMoreMouseClicked
 
@@ -1619,6 +1671,12 @@ public class GUIJuego extends javax.swing.JPanel {
                     }
                 }                       
                 default -> throw new AssertionError();
+            }
+            listaColores.add(6);
+            contadorColor++;
+            if (contadorColor == 5){
+                enviarDatos();
+                contadorColor = 0;
             }
         }
     }//GEN-LAST:event_jpCianMouseClicked
@@ -1682,6 +1740,12 @@ public class GUIJuego extends javax.swing.JPanel {
                 }                       
                 default -> throw new AssertionError();
             }
+            listaColores.add(7);
+            contadorColor++;
+            if (contadorColor == 5){
+                enviarDatos();
+                contadorColor = 0;
+            }
         }
     }//GEN-LAST:event_jpNaranjaMouseClicked
 
@@ -1743,10 +1807,42 @@ public class GUIJuego extends javax.swing.JPanel {
                }                       
                default -> throw new AssertionError();
            }
-
+           listaColores.add(8);
+            contadorColor++;
+            if (contadorColor == 5){
+                enviarDatos();
+                contadorColor = 0;
+            }
         }      
     }//GEN-LAST:event_jpRosaMouseClicked
 
+    
+    public void CargarColoresValidos(List<Integer> listaColoresIniciales){
+        escudo = listaColoresIniciales;
+        System.out.println("Color1: " + escudo.get(0));
+        System.out.println("Color5: " + escudo.get(4));
+    }
+    
+    private void enviarDatos(){
+        boolean bandera = true;
+        for (int i = 0; i < 5; i++) {
+            if (!Objects.equals(listaColores.get(i), escudo.get(i))) {
+                bandera = false;
+            }
+        }
+        if (bandera) {
+            System.out.println("***Gano***");
+        }
+        
+        try {
+            servidorCllbckJuego.enviarColores(listaColores);
+            listaColores.clear();
+        } catch (RemoteException e) {
+            System.err.println("Error al llamar el objRemoto CallBack");
+        }      
+    }    
+    
+        
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;

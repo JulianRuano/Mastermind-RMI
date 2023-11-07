@@ -17,6 +17,7 @@ public class GestionJuegoImpl extends UnicastRemoteObject implements GestionJueg
         super(); // invoca al constructor de la clase base
     }
 
+    @Override
     public int iniciarJuego(int identificacion){
        
         if(idJugador1 == 0){
@@ -30,15 +31,15 @@ public class GestionJuegoImpl extends UnicastRemoteObject implements GestionJueg
                     RegistroDTO obj = new RegistroDTO(idJuego, idJugador1, idJugador2);
                     objReferenciaRemota.enviarNotificacion(obj);
                     System.out.println("El jugador con identificacion " + identificacion + " ha iniciado el juego");
-                    return 1; // Salio bien
+                    return 2; // Salio bien
                 } catch (RemoteException e) {
                     System.out.println("Error al enviar la notificacion");
                 }
         }else{          
             System.out.println("El jugador con identificacion " + identificacion + " ya inicio el juego");
-            return 2; // jugador duplicado
+            return 3; // jugador duplicado
         }      
-        return 3; //Fallo inesperado en el servidor
+        return 4; //Fallo inesperado en el servidor
     }
     public void consultarReferenciaRemota(String direccionIpRMIRegistry, int numPuertoRMIRegistry){
         System.out.println(" ");

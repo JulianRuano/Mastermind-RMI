@@ -1,7 +1,6 @@
 package cliente;
 
 import cliente.sop_rmi.JuegoCllbckImpl;
-import cliente.sop_rmi.JuegoCllbckInt;
 import utilidades.UtilidadesRegistroC;
 import cliente.utilidades.UtilidadesRegistroCll;
 import susuario.dto.UsuarioDTO;
@@ -19,6 +18,7 @@ import vistas.GUIActualizar;
 import vistas.GUIEliminar;
 import vistas.GUIConsultar;
 import vistas.GUIJuego;
+import vistas.GUIJuegoJ2;
 
 
 /**
@@ -327,16 +327,21 @@ public final class ClienteDeObjetos extends javax.swing.JFrame {
         int identificacion = objUsuario.getID();
         System.out.println("==Jugar==");    
         try {
-            objRemotoJuego.iniciarJuego(identificacion);
+            int estado = objRemotoJuego.iniciarJuego(identificacion);
             System.out.println("El jugador con identificacion " + identificacion + " ha iniciado el juego");
             JuegoCllbckImpl nuevoUsuario= new JuegoCllbckImpl(); 
             nuevoUsuario.enviarCliente(this);
             servidorCllbckJuego.registrarUsuario(nuevoUsuario);
-            servidorCllbckJuego.enviarMensaje("Usuario Conectado ID:"+identificacion);
-            //llamar GUI
-            GUIJuego instance = new GUIJuego(objRemotoJuego);
-            ShowJPanel(instance);
-            
+            //llamar GUI del juego 
+            System.out.println("estado: "+estado);
+            if (estado == 1){
+                GUIJuego instance = new GUIJuego(objRemotoJuego,servidorCllbckJuego);
+                ShowJPanel(instance); 
+            }
+            if (estado == 2) {
+                GUIJuegoJ2 instance2 = new GUIJuegoJ2(objRemotoJuego,servidorCllbckJuego);
+                ShowJPanel(instance2); 
+            }          
             
         } catch (RemoteException e) {
             System.out.println("La operacion no se pudo completar, intente nuevamente...");      

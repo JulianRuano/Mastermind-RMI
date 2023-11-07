@@ -6,6 +6,7 @@ package cliente.sop_rmi;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  *
@@ -13,4 +14,7 @@ import java.rmi.RemoteException;
  */
 public interface JuegoCllbckInt extends Remote{
      public void notificar(String mensaje) throws RemoteException;
+     public void notificarColores(List<Integer> listaColores) throws RemoteException;
+     public void notificarEspigas(List<Integer> listaEspigas) throws RemoteException;
+     public void notificarColoresIniciales(List<Integer> listaColoresIniciales) throws RemoteException;
 }

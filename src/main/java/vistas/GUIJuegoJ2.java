@@ -4,7 +4,13 @@
  */
 package vistas;
 
+import cliente.sop_rmi.JuegoCllbckImpl;
 import java.awt.Color;
+import java.rmi.RemoteException;
+import java.util.ArrayList;
+import java.util.List;
+import sjuego.sop_rmi.GestionJuegoInt;
+import sjuego.sop_rmi.ServidorCllbckJuegoInt;
 
 /**
  *
@@ -20,12 +26,30 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
     Color cian = new Color(0,204,204);
     Color naranja = new Color(255,153,0);
     Color rosa = new Color(255,204,255);
+    List<Integer> listaColores;
+    int contadorGeneracion = 1;
 
     /**
      * Creates new form GUIJuegoJ2
      */
-    public GUIJuegoJ2() {
+        
+    private final  GestionJuegoInt objRemotoJuego;
+    JuegoCllbckImpl objCallbck;
+    private final  ServidorCllbckJuegoInt servidorCllbckJuego;
+
+    
+    public GUIJuegoJ2(GestionJuegoInt prmRemotoJuego,ServidorCllbckJuegoInt prmServidorCllbckJuego) throws RemoteException {
         initComponents();
+        this.objRemotoJuego = prmRemotoJuego;
+        this.servidorCllbckJuego = prmServidorCllbckJuego;
+        listaColores = new ArrayList<>();
+        cargarDatosIniciales();     
+    }
+    
+    private void cargarDatosIniciales() throws RemoteException{
+        objCallbck = new JuegoCllbckImpl();
+        objCallbck.enviarJugador2(this);
+        servidorCllbckJuego.registrarUsuario(objCallbck);
     }
 
     /**
@@ -1272,126 +1296,239 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jpRosaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpRosaMouseClicked
-        if (columna == 6) {
+        if (columna == 7) {
             System.err.println("Error: Ya se enviaron los colores");
         }else{
             switch (columna) {
-             case 1 -> {this.jpf1c1.setBackground(rosa); columna++;}
-             case 2 -> {this.jpf1c2.setBackground(rosa); columna++;}
-             case 3 -> {this.jpf1c3.setBackground(rosa); columna++;}
-             case 4 -> {this.jpf1c4.setBackground(rosa); columna++;}
-             case 5 -> {this.jpf1c5.setBackground(rosa); columna++;}
+             case 1 -> {this.jpEscudo1.setBackground(rosa); columna++;}
+             case 2 -> {this.jpEscudo2.setBackground(rosa); columna++;}
+             case 3 -> {this.jpEscudo3.setBackground(rosa); columna++;}
+             case 4 -> {this.jpEscudo4.setBackground(rosa); columna++;}
+             case 5 -> {this.jpEscudo5.setBackground(rosa); columna++;}
              default -> throw new AssertionError();
+            }
+            listaColores.add(8);
+            if (columna == 6){
+                columna++;
+                enviarDatos();
             }
         }
     }//GEN-LAST:event_jpRosaMouseClicked
 
     private void jpNaranjaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpNaranjaMouseClicked
-        if (columna == 6) {
+        if (columna == 7) {
             System.err.println("Error: Ya se enviaron los colores");
         }else{
             switch (columna) {
-             case 1 -> {this.jpf1c1.setBackground(naranja); columna++;}
-             case 2 -> {this.jpf1c2.setBackground(naranja); columna++;}
-             case 3 -> {this.jpf1c3.setBackground(naranja); columna++;}
-             case 4 -> {this.jpf1c4.setBackground(naranja); columna++;}
-             case 5 -> {this.jpf1c5.setBackground(naranja); columna++;}
+             case 1 -> {this.jpEscudo1.setBackground(naranja); columna++;}
+             case 2 -> {this.jpEscudo2.setBackground(naranja); columna++;}
+             case 3 -> {this.jpEscudo3.setBackground(naranja); columna++;}
+             case 4 -> {this.jpEscudo4.setBackground(naranja); columna++;}
+             case 5 -> {this.jpEscudo5.setBackground(naranja); columna++;}
              default -> throw new AssertionError();
+            }
+            listaColores.add(7);
+            if (columna == 6){
+                columna++;
+                enviarDatos();
             }
         }
     
     }//GEN-LAST:event_jpNaranjaMouseClicked
 
     private void jpCianMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpCianMouseClicked
-        if (columna == 6) {
+        if (columna == 7) {
             System.err.println("Error: Ya se enviaron los colores");
         }else{
             switch (columna) {
-             case 1 -> {this.jpf1c1.setBackground(cian); columna++;}
-             case 2 -> {this.jpf1c2.setBackground(cian); columna++;}
-             case 3 -> {this.jpf1c3.setBackground(cian); columna++;}
-             case 4 -> {this.jpf1c4.setBackground(cian); columna++;}
-             case 5 -> {this.jpf1c5.setBackground(cian); columna++;}
+             case 1 -> {this.jpEscudo1.setBackground(cian); columna++;}
+             case 2 -> {this.jpEscudo2.setBackground(cian); columna++;}
+             case 3 -> {this.jpEscudo3.setBackground(cian); columna++;}
+             case 4 -> {this.jpEscudo4.setBackground(cian); columna++;}
+             case 5 -> {this.jpEscudo5.setBackground(cian); columna++;}
              default -> throw new AssertionError();
+            }
+            listaColores.add(6);
+            if (columna == 6){
+                columna++;
+                enviarDatos();
             }
         }      
     }//GEN-LAST:event_jpCianMouseClicked
 
     private void jpAzulMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpAzulMouseClicked
-        if (columna == 6) {
+        if (columna == 7) {
             System.err.println("Error: Ya se enviaron los colores");
         }else{
             switch (columna) {
-             case 1 -> {this.jpf1c1.setBackground(azul); columna++;}
-             case 2 -> {this.jpf1c2.setBackground(azul); columna++;}
-             case 3 -> {this.jpf1c3.setBackground(azul); columna++;}
-             case 4 -> {this.jpf1c4.setBackground(azul); columna++;}
-             case 5 -> {this.jpf1c5.setBackground(azul); columna++;}
+             case 1 -> {this.jpEscudo1.setBackground(azul); columna++;}
+             case 2 -> {this.jpEscudo2.setBackground(azul); columna++;}
+             case 3 -> {this.jpEscudo3.setBackground(azul); columna++;}
+             case 4 -> {this.jpEscudo4.setBackground(azul); columna++;}
+             case 5 -> {this.jpEscudo5.setBackground(azul); columna++;}
              default -> throw new AssertionError();
+            }
+            listaColores.add(1);
+            if (columna == 6){
+                columna++;
+                enviarDatos();
             }
         }       
     }//GEN-LAST:event_jpAzulMouseClicked
 
     private void jpRojoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpRojoMouseClicked
-        if (columna == 6) {
+        if (columna == 7) {
             System.err.println("Eror: Ya se enviaron los colores");
         }else{
             switch (columna) {
-             case 1 -> {this.jpf1c1.setBackground(rojo); columna++;}
-             case 2 -> {this.jpf1c2.setBackground(rojo); columna++;}
-             case 3 -> {this.jpf1c3.setBackground(rojo); columna++;}
-             case 4 -> {this.jpf1c4.setBackground(rojo); columna++;}
-             case 5 -> {this.jpf1c5.setBackground(rojo); columna++;}
+             case 1 -> {this.jpEscudo1.setBackground(rojo); columna++;}
+             case 2 -> {this.jpEscudo2.setBackground(rojo); columna++;}
+             case 3 -> {this.jpEscudo3.setBackground(rojo); columna++;}
+             case 4 -> {this.jpEscudo4.setBackground(rojo); columna++;}
+             case 5 -> {this.jpEscudo5.setBackground(rojo); columna++;}
              default -> throw new AssertionError();
+            }
+            listaColores.add(3);
+            if (columna == 6){
+                columna++;
+                enviarDatos();
             }
         }       
     }//GEN-LAST:event_jpRojoMouseClicked
 
     private void jpMoreMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpMoreMouseClicked
-        if (columna == 6) {
+        if (columna == 7) {
             System.err.println("Error: Ya se enviaron los colores");
         }else{
             switch (columna) {
-             case 1 -> {this.jpf1c1.setBackground(morado); columna++;}
-             case 2 -> {this.jpf1c2.setBackground(morado); columna++;}
-             case 3 -> {this.jpf1c3.setBackground(morado); columna++;}
-             case 4 -> {this.jpf1c4.setBackground(morado); columna++;}
-             case 5 -> {this.jpf1c5.setBackground(morado); columna++;}
+             case 1 -> {this.jpEscudo1.setBackground(morado); columna++;}
+             case 2 -> {this.jpEscudo2.setBackground(morado); columna++;}
+             case 3 -> {this.jpEscudo3.setBackground(morado); columna++;}
+             case 4 -> {this.jpEscudo4.setBackground(morado); columna++;}
+             case 5 -> {this.jpEscudo5.setBackground(morado); columna++;}
              default -> throw new AssertionError();
+            }
+            listaColores.add(5);
+            if (columna == 6){
+                columna++;
+                enviarDatos();
             }
         }       
     }//GEN-LAST:event_jpMoreMouseClicked
 
     private void jpVerdeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpVerdeMouseClicked
-        if (columna == 6) {
+        if (columna == 7) {
             System.err.println("Error: Ya se enviaron los colores");
         }else{
             switch (columna) {
-             case 1 -> {this.jpf1c1.setBackground(verde); columna++;}
-             case 2 -> {this.jpf1c2.setBackground(verde); columna++;}
-             case 3 -> {this.jpf1c3.setBackground(verde); columna++;}
-             case 4 -> {this.jpf1c4.setBackground(verde); columna++;}
-             case 5 -> {this.jpf1c5.setBackground(verde); columna++;}
+             case 1 -> {this.jpEscudo1.setBackground(verde); columna++;}
+             case 2 -> {this.jpEscudo2.setBackground(verde); columna++;}
+             case 3 -> {this.jpEscudo3.setBackground(verde); columna++;}
+             case 4 -> {this.jpEscudo4.setBackground(verde); columna++;}
+             case 5 -> {this.jpEscudo5.setBackground(verde); columna++;}
              default -> throw new AssertionError();
+            }
+            listaColores.add(4);
+            if (columna == 6){
+                columna++;
+                enviarDatos();
             }
         }       
     }//GEN-LAST:event_jpVerdeMouseClicked
 
     private void jpAmarilloMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jpAmarilloMouseClicked
-        if (columna == 6) {
+        if (columna == 7) {
             System.err.println("Error: Ya se enviaron los colores");
         }else{
             switch (columna) {
-             case 1 -> {this.jpf1c1.setBackground(amarillo); columna++;}
-             case 2 -> {this.jpf1c2.setBackground(amarillo); columna++;}
-             case 3 -> {this.jpf1c3.setBackground(amarillo); columna++;}
-             case 4 -> {this.jpf1c4.setBackground(amarillo); columna++;}
-             case 5 -> {this.jpf1c5.setBackground(amarillo); columna++;}
+             case 1 -> {this.jpEscudo1.setBackground(amarillo); columna++;}
+             case 2 -> {this.jpEscudo2.setBackground(amarillo); columna++;}
+             case 3 -> {this.jpEscudo3.setBackground(amarillo); columna++;}
+             case 4 -> {this.jpEscudo4.setBackground(amarillo); columna++;}
+             case 5 -> {this.jpEscudo5.setBackground(amarillo); columna++;}
              default -> throw new AssertionError();
+            }
+            listaColores.add(2);
+            if (columna == 6){
+                columna++;
+                enviarDatos();
             }
         }       
     }//GEN-LAST:event_jpAmarilloMouseClicked
 
+    private void enviarDatos(){
+        try {
+            servidorCllbckJuego.enviarColoresIniciales(listaColores);
+            listaColores.clear();
+        } catch (RemoteException e) {
+            System.err.println("Error al llamar el objRemoto CallBack");
+        }      
+    }
+    
+    public void actulizarTablero(List<Integer> listaColores){
+        
+         System.out.println("**********actulizarTablero****************");
+        
+         switch (contadorGeneracion) {
+                case 1 -> {
+                    this.jpf1c1.setBackground(seleccionColor(listaColores.get(0))); 
+                    this.jpf1c2.setBackground(seleccionColor(listaColores.get(1))); 
+                    this.jpf1c3.setBackground(seleccionColor(listaColores.get(2))); 
+                    this.jpf1c4.setBackground(seleccionColor(listaColores.get(3))); 
+                    this.jpf1c5.setBackground(seleccionColor(listaColores.get(4))); 
+                    contadorGeneracion ++;
+                }
+                case 2 -> {
+                    this.jpf2c1.setBackground(seleccionColor(listaColores.get(0))); 
+                    this.jpf2c2.setBackground(seleccionColor(listaColores.get(1))); 
+                    this.jpf2c3.setBackground(seleccionColor(listaColores.get(2))); 
+                    this.jpf2c4.setBackground(seleccionColor(listaColores.get(3))); 
+                    this.jpf2c5.setBackground(seleccionColor(listaColores.get(4))); 
+                    contadorGeneracion ++;
+                }
+                case 3 -> {
+                    this.jpf3c1.setBackground(seleccionColor(listaColores.get(0))); 
+                    this.jpf3c2.setBackground(seleccionColor(listaColores.get(1))); 
+                    this.jpf3c3.setBackground(seleccionColor(listaColores.get(2))); 
+                    this.jpf3c4.setBackground(seleccionColor(listaColores.get(3))); 
+                    this.jpf3c5.setBackground(seleccionColor(listaColores.get(4))); 
+                    contadorGeneracion ++;
+                }
+                case 4 -> {
+                    this.jpf4c1.setBackground(seleccionColor(listaColores.get(0))); 
+                    this.jpf4c2.setBackground(seleccionColor(listaColores.get(1))); 
+                    this.jpf4c3.setBackground(seleccionColor(listaColores.get(2))); 
+                    this.jpf4c4.setBackground(seleccionColor(listaColores.get(3))); 
+                    this.jpf4c5.setBackground(seleccionColor(listaColores.get(4))); 
+                    contadorGeneracion ++;
+                }
+                case 5 -> {
+                    this.jpf5c1.setBackground(seleccionColor(listaColores.get(0))); 
+                    this.jpf5c2.setBackground(seleccionColor(listaColores.get(1))); 
+                    this.jpf5c3.setBackground(seleccionColor(listaColores.get(2))); 
+                    this.jpf5c4.setBackground(seleccionColor(listaColores.get(3))); 
+                    this.jpf5c5.setBackground(seleccionColor(listaColores.get(4))); 
+                    contadorGeneracion ++;
+                }                       
+                default -> throw new AssertionError();
+            }            
+    }
+    
+    public Color seleccionColor(int valor){
+        Color resultadoColor = null;
+        switch (valor) {
+            case 1 -> {resultadoColor = azul; }
+            case 2 -> {resultadoColor = amarillo;}
+            case 3 -> {resultadoColor = rojo;}
+            case 4 -> {resultadoColor = verde;}
+            case 5 -> {resultadoColor = morado;}
+            case 6 -> {resultadoColor = cian;}
+            case 7 -> {resultadoColor = naranja;}
+            case 8 -> {resultadoColor = rosa;}
+            default -> throw new AssertionError();
+        }
+        return resultadoColor;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
