@@ -8,13 +8,13 @@ import sjuego.sop_rmi.ServidorCllbckJuegoImpl;
 
 public class ServidorDeObjetosJuego {
     public static void main(String args[]) throws RemoteException{
-        int numPuertoNS;
-        String direccionIpNS;
+        int numPuertoNS = 3000;
+        String direccionIpNS ="localhost";
 
-        System.out.println("Cual es el la direcciOn ip donde se encuentra  el N_S");
-        direccionIpNS = UtilidadesConsola.leerCadena();
-        System.out.println("Cual es el número de puerto por el cual escucha el N_S");
-        numPuertoNS = UtilidadesConsola.leerEntero();
+        //System.out.println("Cual es el la direcciOn ip donde se encuentra  el N_S");
+        //direccionIpNS = UtilidadesConsola.leerCadena();
+        //System.out.println("Cual es el número de puerto por el cual escucha el N_S");
+        //numPuertoNS = UtilidadesConsola.leerEntero();
 
         GestionJuegoImpl objRemoto = new GestionJuegoImpl();
         objRemoto.consultarReferenciaRemota(direccionIpNS, numPuertoNS);

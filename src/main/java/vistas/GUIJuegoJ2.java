@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JPanel;
 import sjuego.sop_rmi.GestionJuegoInt;
 import sjuego.sop_rmi.ServidorCllbckJuegoInt;
 
@@ -1162,11 +1161,13 @@ public class GUIJuegoJ2 extends javax.swing.JPanel {
     }//GEN-LAST:event_jpAmarilloMouseClicked
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        listaEspigas.clear();
         listaEspigas.add(b1);
         listaEspigas.add(b2);
         listaEspigas.add(b3);
         listaEspigas.add(b4);
         listaEspigas.add(b5);
+        
         
         try {
             System.out.println("**** Enviar Espigas *****");

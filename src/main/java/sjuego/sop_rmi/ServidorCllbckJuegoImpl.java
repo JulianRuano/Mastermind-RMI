@@ -65,7 +65,8 @@ public class ServidorCllbckJuegoImpl extends UnicastRemoteObject implements Serv
         verificarEspigas();
         for(JuegoCllbckInt objUsuario: usuarios)
         {
-            objUsuario.notificarEspigas(listaEspigas);           
+            objUsuario.notificarEspigas(listaEspigas);     
+            System.out.println("e1"+listaEspigas.get(0)+ " e5: "+listaEspigas.get(4));
         }   
         notificarUsuarios("Nuevas espigas");
      }
@@ -77,7 +78,8 @@ public class ServidorCllbckJuegoImpl extends UnicastRemoteObject implements Serv
         for(JuegoCllbckInt objUsuario: usuarios)
         {          
             objUsuario.notificarColoresIniciales(listaColoresIniciales);                      
-        }         
+        }   
+         notificarUsuarios("Colores iniciales cargados");
      }
     
     private void notificarUsuarios(String mensaje) throws RemoteException {

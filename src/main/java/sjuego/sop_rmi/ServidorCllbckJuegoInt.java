@@ -19,6 +19,6 @@ public interface ServidorCllbckJuegoInt extends Remote{
         //Arreglo del 0 - 7 de 5 posiciones para los colores
         public void enviarColores(List<Integer> listaColores)throws RemoteException;
         public void enviarColoresIniciales(List<Integer> listaColoresIniciales)throws RemoteException;
-        //Arreglo del 0 - 1 de 5 posiciones para las espigas
+        //Arreglo del 0 - 2 de 5 posiciones para las espigas
         public void enviarEspigas(List<Integer> listaEspigas)throws RemoteException;
 }

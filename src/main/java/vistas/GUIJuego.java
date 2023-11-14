@@ -1,7 +1,3 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
- */
 package vistas;
 
 import cliente.sop_rmi.JuegoCllbckImpl;
@@ -12,7 +8,6 @@ import java.util.List;
 import java.util.Objects;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import sjuego.sop_rmi.GestionJuegoInt;
 import sjuego.sop_rmi.ServidorCllbckJuegoInt;
 
@@ -1867,9 +1862,9 @@ public class GUIJuego extends javax.swing.JPanel {
                 case 2 -> {
                     this.jp2Espiga1.setBackground(seleccionColor(listaEspigas.get(0))); 
                     this.jp2Espiga2.setBackground(seleccionColor(listaEspigas.get(1))); 
-                    this.jp2Espiga2.setBackground(seleccionColor(listaEspigas.get(2))); 
-                    this.jp2Espiga2.setBackground(seleccionColor(listaEspigas.get(3))); 
-                    this.jp2Espiga2.setBackground(seleccionColor(listaEspigas.get(4))); 
+                    this.jp2Espiga3.setBackground(seleccionColor(listaEspigas.get(2))); 
+                    this.jp2Espiga4.setBackground(seleccionColor(listaEspigas.get(3))); 
+                    this.jp2Espiga5.setBackground(seleccionColor(listaEspigas.get(4))); 
                     contadorGeneracion ++;
                 }
                 case 3 -> {
